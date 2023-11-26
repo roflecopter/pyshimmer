@@ -87,8 +87,7 @@ class ExGProcessor(SingleChannelProcessor):
 
         # According to formula in Shimmer ECG User Guide
         y_volt = (y - EXG_ADC_OFFSET) * sensitivity / gain
-        return y_volt
-
+        return y
 
 class PPGProcessor(SingleChannelProcessor):
 
@@ -97,7 +96,7 @@ class PPGProcessor(SingleChannelProcessor):
 
     def process_channel(self, ch_type: EChannelType, y: np.ndarray, reader: ShimmerBinaryReader) -> np.ndarray:
         # Convert from mV to V
-        return y / 1000.0
+        return y
 
 
 class TriAxCalProcessor(ChannelPostProcessor):
@@ -118,7 +117,7 @@ class TriAxCalProcessor(ChannelPostProcessor):
             for i, ch in enumerate(sensor_channels):
                 result[ch] = r[i]
 
-        return result
+        return channels
 
 
 class ShimmerReader:
